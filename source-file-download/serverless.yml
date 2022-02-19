@@ -14,7 +14,7 @@ provider:
 
   stackTags:
     ServerlessFramework: "True"
-    Timestamp: ${env.timestamp}
+    Timestamp: ${env:timestamp}
     Environment: ${env:environment}
 
   iamRoleStatements:
@@ -45,6 +45,6 @@ functions:
       # every day at 11:15 AM
       - schedule: cron(15 11 ? * * *)
     environment:
-      KAGGLE_USERNAME: ${:env.KAGGLE_USERNAME}
-      KAGGLE_KEY: ${env.KAGGLE_KEY}
+      KAGGLE_USERNAME: ${env:KAGGLE_USERNAME}
+      KAGGLE_KEY: ${env:KAGGLE_KEY}
       source_bucket: ${self:custom.movieSourceFileBucket}
