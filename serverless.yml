@@ -1,0 +1,73 @@
+service: source-file-download
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: python3.8
+
+  stage: dev
+  region: eu-west-1
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource: arn:aws:lambda:*:*:function:*
+    - Effect: Allow
+      Action:
+        - s3:PutItem
+        - s3:PutObject
+      Resource:
+        - arn:aws:s3:::${self:custom.movieSourceFileBucket}
+    - Effect: Allow
+      Action:
+        - s3:PutItem
+        - s3:PutObject
+      Resource:
+        - arn:aws:s3:::${self:custom.movieSourceFileBucket}/*
+
+custom:
+  region: ${self:provider.region}
+  prefix: ${self:provider.stage}-${self:service}
+  movieSourceFileBucket: ${self:custom.prefix}- ${self:provider.region}-movie-source-bucket
+
+# you can define service wide environment variables here
+environment:
+  KAGGLE_USERNAME: ${env:KAGGLE_USERNAME}
+  KAGGLE_KEY: ${env:KAGGLE_KEY}
+
+# you can add packaging information here
+#package:
+#  patterns:
+#    - '!exclude-me.py'
+#    - '!exclude-me-dir/**'
+#    - include-me.py
+#    - include-me-dir/**
+
+functions:
+  source-file-download:
+    handler: source-file-download.handler.handler
+    events:
+      - S3:
+        bucket: ${self:custom.movieSourceFileBucket}
+        existing: true
+
+#    Define function environment variables here
+#    environment:
+#      variable2: value2
+
+resources:
+  Resources:
+    S3OutputBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.bucketout}
+        AccessControl: Private
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: true
+          BlockPublicPolicy: true
+          IgnorePublicAcls: true
+          RestrictPublicBuckets: true
+        VersioningConfiguration:
+          Status: Enabled
