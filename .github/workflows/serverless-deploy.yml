@@ -30,7 +30,7 @@ jobs:
         run: terraform init
         env:
           TF_VAR_ssm_path: ${{ env.ssm_path }}
-          TF_VAR_region: ${{ env.TF_VAR_region }}
+          TF_VAR_region: ${{ env.region }}
           TF_VAR_environment: ${{ env.environment }
 
       # Add just in case there is a locked state
@@ -43,7 +43,7 @@ jobs:
         continue-on-error: false
         env:
           TF_VAR_ssm_path: ${{ env.ssm_path }}
-          TF_VAR_region: ${{ env.TF_VAR_region }}
+          TF_VAR_region: ${{ env.region }}
           TF_VAR_environment: ${{ env.environment }
 
       - name: Terraform Apply
@@ -51,7 +51,7 @@ jobs:
         run: terraform destroy -auto-approve
         env:
           TF_VAR_ssm_path: ${{ env.ssm_path }}
-          TF_VAR_region: ${{ env.TF_VAR_region }}
+          TF_VAR_region: ${{ env.egion }}
           TF_VAR_environment: ${{ env.environment }
 
       - name: Terraform Output
