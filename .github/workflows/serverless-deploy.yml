@@ -15,10 +15,6 @@ jobs:
     defaults:
       run:
         working-directory: ./shared-infra/dev
-    env:
-      TF_VAR_ssm_path: ${{ env.ssm_path }}
-      TF_VAR_region: ${{ env.TF_VAR_region }}
-      TF_VAR_environment: ${{ env.environment }
     steps:
       - uses: actions/checkout@v2
 
@@ -32,6 +28,10 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init
+        env:
+          TF_VAR_ssm_path: ${{ env.ssm_path }}
+          TF_VAR_region: ${{ env.TF_VAR_region }}
+          TF_VAR_environment: ${{ env.environment }
 
       # Add just in case there is a locked state
       # - name: 'Unlock terraform state'
@@ -41,10 +41,18 @@ jobs:
         id: plan
         run: terraform plan -no-color
         continue-on-error: false
+        env:
+          TF_VAR_ssm_path: ${{ env.ssm_path }}
+          TF_VAR_region: ${{ env.TF_VAR_region }}
+          TF_VAR_environment: ${{ env.environment }
 
       - name: Terraform Apply
         id: apply
         run: terraform destroy -auto-approve
+        env:
+          TF_VAR_ssm_path: ${{ env.ssm_path }}
+          TF_VAR_region: ${{ env.TF_VAR_region }}
+          TF_VAR_environment: ${{ env.environment }
 
       - name: Terraform Output
         id: outputs
