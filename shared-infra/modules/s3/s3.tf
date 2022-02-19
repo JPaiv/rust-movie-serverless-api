@@ -15,6 +15,15 @@ resource "aws_s3_bucket_acl" "movie_data_source_file_bucket_versioning_acl" {
   acl    = "private"
 }
 
+resource "aws_s3_bucket_public_access_block" "app" {
+  bucket = aws_s3_bucket.movie_data_source_file_bucket.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
 resource "aws_s3_bucket" "movie_data_source_file_Log_bucket" {
   bucket = "${var.environment}-movie-source-data-bucket-tf-log-bucket"
 }
