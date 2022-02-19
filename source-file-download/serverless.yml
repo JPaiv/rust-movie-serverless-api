@@ -6,7 +6,7 @@ provider:
   name: aws
   runtime: python3.9
 
-  stage: ${env:ENVIRONMENT}
+  stage: ${env:environment}
   region: ${env:REGION}
 
   iamRoleStatements:
@@ -29,7 +29,7 @@ provider:
 
 custom:
   region: ${self:provider.region}
-  movieSourceFileBucket: ${env:ENVIRONMENT}/${env:SSM_PATH}
+  movieSourceFileBucket: ${env:environment}/${env:SSM_PATH}
 
 functions:
   source-file-download:
