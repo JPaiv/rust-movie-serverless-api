@@ -27,7 +27,3 @@ def _upload_source_data_to_s3(source_file_csv: str):
     s3 = boto3.resource('s3')
     s3.Bucket(os.environ["source_bucket"]).upload_file(
         source_file_csv, "netflix.csv")
-
-
-if __name__ == "__main__":
-    handler("-", "-")
