@@ -80,11 +80,12 @@ jobs:
 
       - name: Install serverless plugin python-requirements
         run: sls plugin install -n serverless-python-requirements
+
+      - name: Serverless deploy all functions
+        run: serverless deploy
         env:
           KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
           KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
-      - name: Serverless deploy all functions
-        run: serverless deploy
 
       #- name: Serverless remove all functions
       #  run: serverless remove
