@@ -34,9 +34,8 @@ functions:
   source-file-download:
     handler: handler.handler
     events:
-      - S3:
-          bucket: ${self:custom.movieSourceFileBucket}
-          existing: true
+      # every day at 11:15 AM
+      - schedule: cron(15 11 ? * * *)
     environment:
       KAGGLE_USERNAME: ${:env.KAGGLE_USERNAME}
       KAGGLE_KEY: ${env.KAGGLE_KEY}
