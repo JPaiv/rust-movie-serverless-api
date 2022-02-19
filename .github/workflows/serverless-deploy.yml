@@ -31,7 +31,7 @@ jobs:
         env:
           TF_VAR_ssm_path: ${{ env.ssm_path }}
           TF_VAR_region: ${{ env.region }}
-          TF_VAR_environment: ${{ env.environment }
+          TF_VAR_environment: ${{ env.environment }}
 
       # Add just in case there is a locked state
       # - name: 'Unlock terraform state'
@@ -44,7 +44,7 @@ jobs:
         env:
           TF_VAR_ssm_path: ${{ env.ssm_path }}
           TF_VAR_region: ${{ env.region }}
-          TF_VAR_environment: ${{ env.environment }
+          TF_VAR_environment: ${{ env.environment }}
 
       - name: Terraform Apply
         id: apply
@@ -52,7 +52,7 @@ jobs:
         env:
           TF_VAR_ssm_path: ${{ env.ssm_path }}
           TF_VAR_region: ${{ env.egion }}
-          TF_VAR_environment: ${{ env.environment }
+          TF_VAR_environment: ${{ env.environment }}
 
       - name: Terraform Output
         id: outputs
