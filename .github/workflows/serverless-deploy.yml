@@ -52,6 +52,7 @@ jobs:
 
   serverless-movie-api-deploy:
     runs-on: ubuntu-latest
+    needs: terraform-deploy-shared-infrastrucsture
     env:
       KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
       KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}

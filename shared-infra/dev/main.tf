@@ -23,6 +23,8 @@ module "ssm" {
   source      = "../modules/ssm"
   environment = var.environment
   bucket_id   = module.s3.bucket_id
+  ssm_path    = var.ssm_path
+
   depends_on = [
     module.s3
   ]
