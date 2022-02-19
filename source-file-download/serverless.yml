@@ -8,9 +8,6 @@ provider:
 
   stage: ${env:environment}
   region: ${env:region}
-  environment:
-    KAGGLE_USERNAME: ${env:KAGGLE_USERNAME}
-    KAGGLE_KEY: ${env:KAGGLE_KEY}
 
   iamRoleStatements:
     - Effect: Allow
@@ -41,5 +38,5 @@ functions:
         bucket: ${self:custom.movieSourceFileBucket}
         existing: true
   environment:
-    KAGGLE_USERNAME: ${self:env.KAGGLE_USERNAME}
-    KAGGLE_KEY: ${self:env.KAGGLE_KEY}
+    KAGGLE_USERNAME: ${:env.KAGGLE_USERNAME}
+    KAGGLE_KEY: ${env.KAGGLE_KEY}
