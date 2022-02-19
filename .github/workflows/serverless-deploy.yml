@@ -60,6 +60,9 @@ jobs:
 
   serverless-movie-api-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./source-file-download
     needs: terraform-deploy-shared-infrastrucsture
     env:
       KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
