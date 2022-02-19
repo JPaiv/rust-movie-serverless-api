@@ -2,12 +2,20 @@ service: serverless-movie-api
 
 frameworkVersion: "3"
 
+plugins:
+  - serverless-plugin-resource-tagging
+
 provider:
   name: aws
   runtime: python3.8
 
   stage: ${env:environment}
   region: ${env:region}
+
+  stackTags:
+    ServerlessFramework: "True"
+    Timestamp: ${env.timestamp}
+    Environment: ${env:environment}
 
   iamRoleStatements:
     - Effect: Allow

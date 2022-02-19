@@ -81,11 +81,19 @@ jobs:
       - name: Install serverless plugin python-requirements
         run: sls plugin install -n serverless-python-requirements
 
+      - name: Install serverless plugin serverless-plugin-resource-tagging
+        run: sls plugin install -n serverless-plugin-resource-tagging
+
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
       - name: Serverless deploy all functions
         run: serverless deploy
         env:
           KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
           KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+          timestamp: ${{ steps.date.outputs.date }}
 
       #- name: Serverless remove all functions
       #  run: serverless remove
