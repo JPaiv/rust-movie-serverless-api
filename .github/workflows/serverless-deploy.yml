@@ -54,9 +54,9 @@ jobs:
           TF_VAR_region: ${{ env.egion }}
           TF_VAR_environment: ${{ env.environment }}
 
-      - name: Terraform Output
-        id: outputs
-        run: terraform output
+      # - name: Terraform Output
+      #   id: outputs
+      #   run: terraform output
 
   serverless-movie-api-deploy:
     runs-on: ubuntu-latest

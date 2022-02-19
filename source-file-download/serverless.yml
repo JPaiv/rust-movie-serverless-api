@@ -7,7 +7,7 @@ provider:
   runtime: python3.9
 
   stage: ${env:environment}
-  region: ${env:REGION}
+  region: ${env:region}
 
   iamRoleStatements:
     - Effect: Allow
@@ -28,8 +28,7 @@ provider:
         - arn:aws:s3:::${self:custom.movieSourceFileBucket}/*
 
 custom:
-  region: ${self:provider.region}
-  movieSourceFileBucket: ${env:environment}/${env:SSM_PATH}
+  movieSourceFileBucket: ${env:environment}/${env:ssm_path}
 
 functions:
   source-file-download:
