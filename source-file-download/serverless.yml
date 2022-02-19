@@ -2,9 +2,6 @@ service: serverless-movie-api
 
 frameworkVersion: "3"
 
-plugins:
-  - serverless-python-requirements
-
 provider:
   name: aws
   runtime: python3.8
