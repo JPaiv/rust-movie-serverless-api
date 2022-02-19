@@ -1,0 +1,43 @@
+service: serverless-movie-api
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: python3.9
+
+  stage: ${env:ENVIRONMENT}
+  region: ${env:REGION}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - lambda:InvokeFunction
+      Resource: arn:aws:lambda:*:*:function:*
+    - Effect: Allow
+      Action:
+        - s3:PutItem
+        - s3:PutObject
+      Resource:
+        - arn:aws:s3:::${self:custom.movieSourceFileBucket}
+    - Effect: Allow
+      Action:
+        - s3:PutItem
+        - s3:PutObject
+      Resource:
+        - arn:aws:s3:::${self:custom.movieSourceFileBucket}/*
+
+custom:
+  region: ${self:provider.region}
+  movieSourceFileBucket: ${env:ENVIRONMENT}/${env:SSM_PATH}
+
+functions:
+  source-file-download:
+    handler: handler.handler
+    events:
+      - S3:
+        bucket: ${self:custom.movieSourceFileBucket}
+        existing: true
+  environment:
+    KAGGLE_USERNAME: ${env:KAGGLE_USERNAME}
+    KAGGLE_KEY: ${env:KAGGLE_KEY}
