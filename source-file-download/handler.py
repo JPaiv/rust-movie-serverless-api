@@ -25,5 +25,5 @@ def handler(event, context):
 
 def _upload_source_data_to_s3(source_file_csv: str):
     s3 = boto3.resource('s3')
-    s3.Bucket(os.environ["source_bucket"]).upload_file(
+    s3.Bucket(os.environ["bucket_id"]).upload_file(
         source_file_csv, "netflix.csv")
