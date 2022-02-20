@@ -23,18 +23,18 @@ provider:
       Action:
         - lambda:InvokeFunction
       Resource: arn:aws:lambda:*:*:function:*
-    - Effect: Allow
-      Action:
-        - s3:PutItem
-        - s3:PutObject
-      Resource:
-        - arn:aws:s3:::${env:bucket_id}
-    - Effect: Allow
-      Action:
-        - s3:PutItem
-        - s3:PutObject
-      Resource:
-        - arn:aws:s3:::${env:bucket_id}/*
+    # - Effect: Allow
+    #   Action:
+    #     - s3:PutItem
+    #     - s3:PutObject
+    #   Resource:
+    #     - arn:aws:s3:::${self:custom.serverlessSsmFetch.bucket_id}
+    # - Effect: Allow
+    #   Action:
+    #     - s3:PutItem
+    #     - s3:PutObject
+    #   Resource:
+    #     - arn:aws:s3:::${env:bucket_id}/*
 
 custom:
   serverlessSsmFetch:
