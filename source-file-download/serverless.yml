@@ -40,6 +40,8 @@ provider:
 custom:
   serverlessSsmFetch:
     bucket_id: /${env:environment}/${env:ssm_path}
+  pythonRequirements:
+    dockerizePip: non-linux
 
 functions:
   source-file-download:
