@@ -24,20 +24,7 @@ provider:
       Action:
         - lambda:InvokeFunction
       Resource: arn:aws:lambda:*:*:function:*
-    # - Effect: Allow
-    #   Action:
-    #     - s3:PutItem
-    #     - s3:PutObject
-    #   Resource:
-    #     - arn:aws:s3:::${self:custom.serverlessSsmFetch.bucket_id}
-    # - Effect: Allow
-    #   Action:
-    #     - s3:PutItem
-    #     - s3:PutObject
-    #   Resource:
-    #     - arn:aws:s3:::${env:bucket_id}/*
 
-custom:
   serverlessSsmFetch:
     bucket_id: /${env:environment}/${env:ssm_path}
   pythonRequirements:
@@ -52,4 +39,3 @@ functions:
     environment:
       KAGGLE_USERNAME: ${env:KAGGLE_USERNAME}
       KAGGLE_KEY: ${env:KAGGLE_KEY}
-      #bucket_id: ${self:custom.serverlessSsmFetch.bucket_id}

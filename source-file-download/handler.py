@@ -11,7 +11,6 @@ logging.getLogger().setLevel("INFO")
 
 def handler(event, context):
     temp_dir = tempfile.mkdtemp()
-    install("kaggle")
 
     process = subprocess.run(['kaggle', 'datasets', 'download', 'shivamb/netflix-shows', '--path', temp_dir],
                              stdout=subprocess.PIPE,
@@ -31,7 +30,3 @@ def _upload_source_data_to_s3(source_file_csv: str):
     s3 = boto3.resource('s3')
     s3.Bucket(os.environ["bucket_id"]).upload_file(
         source_file_csv, "netflix.csv")
-
-
-def install(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
