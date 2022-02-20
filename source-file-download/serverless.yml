@@ -28,13 +28,13 @@ provider:
         - s3:PutItem
         - s3:PutObject
       Resource:
-        - arn:aws:s3:::${custom:serverlessSsmFetch.bucket_id}
+        - arn:aws:s3:::${self:custom.serverlessSsmFetch.bucket_id}
     - Effect: Allow
       Action:
         - s3:PutItem
         - s3:PutObject
       Resource:
-        - arn:aws:s3:::${custom:serverlessSsmFetch.bucket_id}/*
+        - arn:aws:s3:::${self:custom.serverlessSsmFetch.bucket_id}/*
 
 custom:
   serverlessSsmFetch:
@@ -49,4 +49,4 @@ functions:
     environment:
       KAGGLE_USERNAME: ${env:KAGGLE_USERNAME}
       KAGGLE_KEY: ${env:KAGGLE_KEY}
-      bucket_id: ${custom:serverlessSsmFetch.bucket_id}
+      bucket_id: ${self:custom.serverlessSsmFetch.bucket_id}
