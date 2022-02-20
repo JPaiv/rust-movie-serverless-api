@@ -49,4 +49,4 @@ functions:
     environment:
       KAGGLE_USERNAME: ${env:KAGGLE_USERNAME}
       KAGGLE_KEY: ${env:KAGGLE_KEY}
-      bucket_id: ${self:custom.serverlessSsmFetch.bucket_id}
+      #bucket_id: ${self:custom.serverlessSsmFetch.bucket_id}
