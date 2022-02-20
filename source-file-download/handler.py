@@ -11,9 +11,11 @@ logging.getLogger().setLevel("INFO")
 def handler(event, context):
     temp_dir = tempfile.mkdtemp()
 
-    subprocess.run(['kaggle', 'datasets', 'download', 'shivamb/netflix-shows', '--path', temp_dir],
-                   stdout=subprocess.PIPE,
-                   universal_newlines=True)
+    process = subprocess.run(['kaggle', 'datasets', 'download', 'shivamb/netflix-shows', '--path', temp_dir],
+                             stdout=subprocess.PIPE,
+                             universal_newlines=True)
+
+    process
 
     with zipfile.ZipFile(f"{temp_dir}/netflix-shows.zip", 'r') as source_file_zip:
         source_file_zip.extractall(temp_dir)
