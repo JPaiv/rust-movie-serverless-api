@@ -49,4 +49,4 @@ functions:
     environment:
       KAGGLE_USERNAME: ${env:KAGGLE_USERNAME}
       KAGGLE_KEY: ${env:KAGGLE_KEY}
-      source_bucket: ${bucket_id}
+      source_bucket: bucket_id
