@@ -4,6 +4,7 @@ frameworkVersion: "3"
 
 plugins:
   - serverless-plugin-resource-tagging
+  - serverless-ssm-fetch
 
 provider:
   name: aws
@@ -27,17 +28,18 @@ provider:
         - s3:PutItem
         - s3:PutObject
       Resource:
-        - arn:aws:s3:::${self:custom.movieSourceFileBucket}
+        - arn:aws:s3:::${bucket_id}
     - Effect: Allow
       Action:
         - s3:PutItem
         - s3:PutObject
       Resource:
-        - arn:aws:s3:::${self:custom.movieSourceFileBucket}/*
+        - arn:aws:s3:::${bucket_id}/*
 
 custom:
   bucket_name: ${ssm:${env:ssm_path}}
-  movieSourceFileBucket: ${env:environment}/${env:ssm_path}
+  serverlessSsmFetch:
+    bucket_id: ${env:environment}/${env:ssm_path}
 
 functions:
   source-file-download:
@@ -48,4 +50,4 @@ functions:
     environment:
       KAGGLE_USERNAME: ${env:KAGGLE_USERNAME}
       KAGGLE_KEY: ${env:KAGGLE_KEY}
-      source_bucket: ${self:custom.movieSourceFileBucket}
+      source_bucket: ${bucket_id}

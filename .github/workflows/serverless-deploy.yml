@@ -84,6 +84,9 @@ jobs:
       - name: Install serverless plugin serverless-plugin-resource-tagging
         run: sls plugin install -n serverless-plugin-resource-tagging
 
+      - name: Install serverless plugin serverless-plugin-resource-tagging
+        run: sls plugin install --name serverless-ssm-fetch
+
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'+%Y-%m-%d %H:%M:%S')"
